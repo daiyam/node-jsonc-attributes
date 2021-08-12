@@ -1,0 +1,18 @@
+input: |
+  {
+    "x": 1,
+    "y": 2,
+    // #enable(foobar="foobar")
+    // "str": "123",
+    "z": 3
+  }
+output: |
+  {
+    "x": 1,
+    "y": 2,
+    // #enable(foobar="foobar")
+    "str": "123",
+    "z": 3
+  }
+args:
+  foobar: foobar

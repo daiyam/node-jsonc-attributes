@@ -1,0 +1,40 @@
+input: |
+  {
+    "foo": {
+      // #enable(foobar="foobar")
+      "bar": {
+        "qux": {
+          "x": 0,
+          "y": 0
+        }
+      },
+
+        // #enable(foobar="foobar")
+        "baz": {
+          "qux": {
+            "x": 0,
+            "y": 0
+          }
+        }
+    }
+  }
+output: |
+  {
+    "foo": {
+      // #enable(foobar="foobar")
+      // "bar": {
+      //   "qux": {
+      //     "x": 0,
+      //     "y": 0
+      //   }
+      // },
+
+        // #enable(foobar="foobar")
+        // "baz": {
+        //   "qux": {
+        //     "x": 0,
+        //     "y": 0
+        //   }
+        // }
+    }
+  }

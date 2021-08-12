@@ -1,0 +1,26 @@
+input: |
+  [
+    1,
+    2,
+    // #enable(foobar="foobar")
+    // [
+    //   1,
+    //   2,
+    //   3
+    // ],
+    3
+  ]
+output: |
+  [
+    1,
+    2,
+    // #enable(foobar="foobar")
+    [
+      1,
+      2,
+      3
+    ],
+    3
+  ]
+args:
+  foobar: foobar

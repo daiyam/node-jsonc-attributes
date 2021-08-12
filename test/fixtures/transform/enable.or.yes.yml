@@ -1,0 +1,16 @@
+input: |
+  {
+    "x": 0,
+    "y": 0,
+    // #enable(foobar="foobar"|"quxbaz")
+    // "z": 0,
+  }
+output: |
+  {
+    "x": 0,
+    "y": 0,
+    // #enable(foobar="foobar"|"quxbaz")
+    "z": 0,
+  }
+args:
+  foobar: quxbaz

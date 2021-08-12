@@ -1,0 +1,18 @@
+input: |
+  {
+    "x": 0,
+    "y": 0,
+    // #if(foobar="foobar")
+    // "z": 0,
+    // #endif
+  }
+output: |
+  {
+    "x": 0,
+    "y": 0,
+    // #if(foobar="foobar")
+    // "z": 0,
+    // #endif
+  }
+args:
+  foobar: quxbaz

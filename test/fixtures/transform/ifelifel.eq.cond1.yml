@@ -1,0 +1,26 @@
+input: |
+  {
+    "x": 0,
+    "y": 0,
+    // #if(foobar="foobar")
+    // "z": 0,
+    // #elif(foobar="quxbaz")
+    // "z": 1,
+    // #else
+    // "z": 2,
+    // #endif
+  }
+output: |
+  {
+    "x": 0,
+    "y": 0,
+    // #if(foobar="foobar")
+    "z": 0,
+    // #elif(foobar="quxbaz")
+    // "z": 1,
+    // #else
+    // "z": 2,
+    // #endif
+  }
+args:
+  foobar: foobar

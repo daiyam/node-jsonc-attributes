@@ -1,0 +1,18 @@
+input: |
+  [
+    1,
+    2,
+    // #enable(foobar="foobar")
+    // "123",
+    3
+  ]
+output: |
+  [
+    1,
+    2,
+    // #enable(foobar="foobar")
+    "123",
+    3
+  ]
+args:
+  foobar: foobar
