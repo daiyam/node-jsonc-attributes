@@ -1,27 +1,86 @@
-[@daiyam/jsonc-attributes](https://github.com/daiyam/node-jsonc-attributes)
-=========================================================
+[@daiyam/jsonc-preprocessor](https://github.com/daiyam/node-jsonc-preprocessor)
+===============================================================================
 
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
-[![NPM Version](https://img.shields.io/npm/v/@daiyam/jsonc-attributes.svg?colorB=green)](https://www.npmjs.com/package/@daiyam/jsonc-attributes)
+[![NPM Version](https://img.shields.io/npm/v/@daiyam/jsonc-preprocessor.svg?colorB=green)](https://www.npmjs.com/package/@daiyam/jsonc-preprocessor)
 [![License](https://img.shields.io/badge/donate-ko--fi-green)](https://ko-fi.com/daiyam)
 [![License](https://img.shields.io/badge/donate-liberapay-green)](https://liberapay.com/daiyam/donate)
 [![License](https://img.shields.io/badge/donate-paypal-green)](https://paypal.me/daiyam99)
 
-
+Disable/enable/ignore blocks based on rules found in the JSONC text
 
 Getting Started
 ---------------
 
 With [node](http://nodejs.org) previously installed:
 
-	npm install @daiyam/jsonc-attributes
+	npm install @daiyam/jsonc-preprocessor
 
 ```typescript
-import {  } from '@daiyam/jsonc-attributes'
+import {transform} from '@daiyam/jsonc-preprocessor';
 
+const TYPES = {
+	version: 'version',
+};
+
+function preprocessJSON(text: string, {host: string, os: string, editor: string, version: string}): string {
+	const args = {
+		host,
+		os,
+		editor,
+		version,
+	};
+
+	return transform(text, TYPES, args);
+}
 ```
 
-## Donations
+Directives
+----------
+
+### `enable`
+
+```
+{
+    // #enable(os="linux")
+    // "key": "foobar"
+}
+```
+
+If `os` is equal to `linux`, the block `"key": "foobar"` will be uncommented. If not, the block will be commented.
+
+### `if/else`
+
+```
+{
+    // #if(os="mac")
+    "key": "foo"
+    // #elif(os="windows", host="host1"|"host2")
+    "key": "bar"
+    // #elif(version>="2.18.1")
+    "key": "qux"
+    // #else
+    "key": "baz"
+    // #endif
+}
+```
+
+`#elif(os="windows", host="host1"|"host2")` is `true` when `os` equals `windows` ***and*** `host` equals `host1` or `host2`.
+`#elif(os="windows", version>="2.18.1")` is `true` when `version` is greater than or equal to `2.18.1`.
+
+### `ignore`
+
+```
+{
+    // #ignore
+    "key": "foobar"
+}
+```
+
+The block `"key": "foobar"` will always be removed.
+
+Donations
+---------
 
 Support this project by becoming a financial contributor.
 

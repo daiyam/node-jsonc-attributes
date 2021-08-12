@@ -1,15 +1,20 @@
 {
 	"name": "@daiyam/jsonc-preprocessor",
-	"description": "",
+	"description": "Disable/enable/ignore blocks based on rules found in the JSONC text",
 	"version": "0.0.0",
 	"author": {
 		"name": "Baptiste Augrain",
 		"email": "daiyam@zokugun.org"
 	},
 	"license": "MIT",
-	"homepage": "",
-	"repository": "",
-	"bugs": "",
+	"homepage": "https://github.com/daiyam/node-jsonc-preprocessor",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/daiyam/node-jsonc-preprocessor.git"
+	},
+	"bugs": {
+		"url": "https://github.com/daiyam/node-jsonc-preprocessor/issues"
+	},
 	"main": "lib/index.js",
 	"types": "lib/index.d.ts",
 	"scripts": {
@@ -46,5 +51,10 @@
 		"xo": "^0.43.0",
 		"yaml": "^1.10.2"
 	},
-	"keywords": []
+	"keywords": [
+		"attribute",
+		"attributes",
+		"jsonc",
+		"preprocessor"
+	]
 }
