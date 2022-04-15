@@ -3,12 +3,14 @@ input: |
     // #rewrite-enable
     // #if(os="mac"|"windows")
     // "key": "#{os}"
+    "key": "mac" // #del
     // #else
     // "key": "linux"
     // #endif
+    // #rewrite-disable
 
     // #if(os="mac"|"windows")
-    // "key2": "#{os}"
+    "key2": "#{os}"
     // #else
     // "key2": "linux"
     // #endif
@@ -18,17 +20,14 @@ output: |
     // #rewrite-enable
     // #if(os="mac"|"windows")
     // "key": "#{os}"
-    "key": "mac" // #del
     // #else
     // "key": "linux"
     // #endif
+    // #rewrite-disable
 
     // #if(os="mac"|"windows")
     // "key2": "#{os}"
-    "key2": "mac" // #del
     // #else
     // "key2": "linux"
     // #endif
   }
-args:
-  os: mac

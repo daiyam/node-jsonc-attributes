@@ -8,7 +8,15 @@ export function uncomment(input: string[], line: number, output: string[], rewri
 
 	if(rewrite) {
 		while(line <= endOfValue) {
-			output.push(rewriteLine(uncommentLine(input[line]), args!));
+			const uncomment = uncommentLine(input[line]);
+			const rewrite = rewriteLine(uncomment, args!);
+
+			if(uncomment === rewrite) {
+				output.push(uncomment);
+			}
+			else {
+				output.push(input[line], rewrite);
+			}
 
 			++line;
 		}

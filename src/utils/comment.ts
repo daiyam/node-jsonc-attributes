@@ -8,7 +8,9 @@ export function comment(input: string[], line: number, indent: string, output: s
 	const prefix = indent + '// ';
 
 	while(line <= endOfValue) {
-		output.push(commentLine(input[line], indent, prefix));
+		if(!input[line].endsWith('// #del')) {
+			output.push(commentLine(input[line], indent, prefix));
+		}
 
 		++line;
 	}

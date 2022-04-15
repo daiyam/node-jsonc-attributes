@@ -21,7 +21,7 @@ export function rewriteLine(line: string, args: Record<string, string>): string 
 
 		result += line.slice(index);
 
-		return result;
+		return `${result} // #del`;
 	}
 	else {
 		return line;

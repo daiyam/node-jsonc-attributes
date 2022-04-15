@@ -2,12 +2,10 @@ input: |
   {
     // #rewrite-next-line
     // "key": "#{os}"
+    "key": "linux" // #del
   }
 output: |
   {
     // #rewrite-next-line
     // "key": "#{os}"
-    "key": "linux" // #del
   }
-args:
-  os: linux

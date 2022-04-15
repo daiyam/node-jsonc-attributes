@@ -16,6 +16,10 @@ export function rewriteLine(_: boolean, input: string[], line: number, output: s
 	}
 	else {
 		line = comment(input, line, indent(directive), output);
+
+		if(input[line].endsWith('// #del')) {
+			++line;
+		}
 	}
 
 	return line;
