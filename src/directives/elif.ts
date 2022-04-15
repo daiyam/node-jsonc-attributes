@@ -21,7 +21,10 @@ export function elif(condition: boolean, input: string[], line: number, output: 
 		type: StateType.ELSE_IF,
 		value: condition,
 		indent: stack[0].indent,
+		rewrite: stack[0].rewrite,
 	});
 
 	return line + 1;
 }
+
+elif.isConditional = true;

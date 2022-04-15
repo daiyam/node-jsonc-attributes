@@ -54,13 +54,13 @@ If `os` is equal to `linux`, the block `"key": "foobar"` will be uncommented. If
 ```
 {
     // #if(os="mac")
-    "key": "foo"
+    // "key": "foo"
     // #elif(os="windows", host="host1"|"host2")
-    "key": "bar"
+    // "key": "bar"
     // #elif(version>="2.18.1")
-    "key": "qux"
+    // "key": "qux"
     // #else
-    "key": "baz"
+    // "key": "baz"
     // #endif
 }
 ```
@@ -78,6 +78,38 @@ If `os` is equal to `linux`, the block `"key": "foobar"` will be uncommented. If
 ```
 
 The block `"key": "foobar"` will always be removed.
+
+### `rewrite-enable`/`rewrite-disable`
+
+```
+{
+    // #rewrite-enable
+    // #if(os="mac"|"windows")
+    // "key": "#{os}"
+    // #else
+    // "key": "linux"
+    // #endif
+    // #rewrite-disable
+
+    // #if(os="mac"|"windows")
+    // "key2": "#{os}"
+    // #else
+    // "key2": "linux"
+    // #endif
+}
+```
+
+`key` will have the following values: `max`, `windows` or `linux`.
+`key2` will have the following values: `#{os}` or `linux`.
+
+### `rewrite-next-line`
+
+```
+{
+    // #rewrite-next-line
+    // "key": "#{os}"
+}
+```
 
 Donations
 ---------

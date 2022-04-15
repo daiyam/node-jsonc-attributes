@@ -1,0 +1,12 @@
+input: |
+  {
+    // #rewrite-next-line
+    // "key": "#{os}"
+  }
+output: |
+  {
+    // #rewrite-next-line
+    "key": "linux"
+  }
+args:
+  os: linux

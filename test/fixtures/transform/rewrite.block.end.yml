@@ -1,0 +1,34 @@
+input: |
+  {
+    // #rewrite-enable
+    // #if(os="mac"|"windows")
+    // "key": "#{os}"
+    // #else
+    // "key": "linux"
+    // #endif
+    // #rewrite-disable
+
+    // #if(os="mac"|"windows")
+    // "key2": "#{os}"
+    // #else
+    // "key2": "linux"
+    // #endif
+  }
+output: |
+  {
+    // #rewrite-enable
+    // #if(os="mac"|"windows")
+    "key": "mac"
+    // #else
+    // "key": "linux"
+    // #endif
+    // #rewrite-disable
+
+    // #if(os="mac"|"windows")
+    "key2": "#{os}"
+    // #else
+    // "key2": "linux"
+    // #endif
+  }
+args:
+  os: mac

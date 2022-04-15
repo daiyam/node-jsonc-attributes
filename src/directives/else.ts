@@ -23,6 +23,7 @@ export function directive(condition: boolean, input: string[], line: number, out
 		type: StateType.ELSE,
 		value: condition,
 		indent: stack[0].indent,
+		rewrite: stack[0].rewrite,
 	});
 
 	return line + 1;
