@@ -1,9 +1,9 @@
-import path from 'path';
 import fs from 'fs';
-import yaml from 'yaml';
+import path from 'path';
 import { expect } from 'chai';
 import globby from 'globby';
-import { comment } from '..';
+import yaml from 'yaml';
+import { comment } from '../src';
 
 describe('comment', () => {
 	function prepare(file: string) {

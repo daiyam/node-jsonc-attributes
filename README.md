@@ -65,7 +65,7 @@ If `os` is equal to `linux`, the block `"key": "foobar"` will be uncommented. If
 }
 ```
 
-`#elif(os="windows", host="host1"|"host2")` is `true` when `os` equals `windows` ***and*** `host` equals `host1` or `host2`.
+`#elif(os="windows", host="host1"|"host2")` is `true` when `os` equals `windows` ***and*** `host` equals `host1` or `host2`.<br />
 `#elif(os="windows", version>="2.18.1")` is `true` when `version` is greater than or equal to `2.18.1`.
 
 ### `ignore`

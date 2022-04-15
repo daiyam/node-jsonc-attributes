@@ -21,7 +21,6 @@ export function transform(input: string, types: Record<string, string>, args: Re
 		const match = DIRECTIVE_REGEX.exec(line);
 
 		if(match) {
-			// @ts-expect-error
 			const directive = directives[match[1]] as (condition: boolean, input: string[], line: number, output: string[], stack: State[]) => number;
 
 			if(directive) {

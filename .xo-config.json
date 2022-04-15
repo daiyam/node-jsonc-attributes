@@ -1,25 +1,26 @@
 {
 	"ignores": [
-		"./*.config.js",
-		"./test/fixtures"
+		"*.config.js",
+		"test/fixtures"
+	],
+	"plugins": [
+		"chai-friendly"
+	],
+	"overrides": [
+		{
+			"files": "**/*.test.ts",
+			"rules": {
+				"@typescript-eslint/no-unused-expressions": "off",
+				"chai-friendly/no-unused-expressions": "error"
+			}
+		}
 	],
 	"rules": {
 		"arrow-parens": [
 			"error",
 			"always"
 		],
-		"capitalized-comments": [
-			"error",
-			"always",
-			{
-				"line": {
-					"ignorePattern": "."
-				},
-				"block": {
-					"ignorePattern": "\\w+\\.ts\\b"
-				}
-			}
-		],
+		"capitalized-comments": "off",
 		"complexity": "off",
 		"default-case": "off",
 		"max-depth": [
@@ -34,10 +35,7 @@
 		"no-await-in-loop": "off",
 		"one-var": [
 			"error",
-			{
-				"initialized": "never",
-				"uninitialized": "consecutive"
-			}
+			"never"
 		],
 		"@typescript-eslint/brace-style": [
 			"error",
@@ -77,6 +75,67 @@
 		"unicorn/prefer-module": "off",
 		"unicorn/prefer-node-protocol": "off",
 		"unicorn/prefer-switch": "off",
-		"unicorn/prefer-ternary": "off"
+		"unicorn/prefer-ternary": "off",
+		"@typescript-eslint/ban-types": "off",
+		"@typescript-eslint/member-ordering": [
+			"error",
+			{
+				"default": [
+					"field",
+					"constructor",
+					"get",
+					"set",
+					"method"
+				]
+			}
+		],
+		"@typescript-eslint/naming-convention": [
+			"error",
+			{
+				"selector": "variable",
+				"modifiers": [
+					"const",
+					"global"
+				],
+				"format": [
+					"camelCase",
+					"UPPER_CASE"
+				]
+			},
+			{
+				"selector": "variable",
+				"format": [
+					"camelCase"
+				]
+			}
+		],
+		"@typescript-eslint/no-inferrable-types": "off",
+		"import/extensions": [
+			"error",
+			"never"
+		],
+		"import/order": [
+			"error",
+			{
+				"groups": [
+					"builtin",
+					"external",
+					"internal",
+					"parent",
+					"sibling",
+					"index",
+					"object"
+				],
+				"alphabetize": {
+					"order": "asc",
+					"caseInsensitive": true
+				}
+			}
+		],
+		"no-lonely-if": "off",
+		"no-negated-condition": "off",
+		"unicorn/no-array-callback-reference": "off",
+		"unicorn/no-object-as-default-parameter": "off",
+		"unicorn/prefer-json-parse-buffer": "off"
 	}
 }
