@@ -1,0 +1,15 @@
+input: |
+  {
+    "x": 0,
+    "y": 0,
+    // #enable(?foobar)
+    // "z": 0,
+  }
+output: |
+  {
+    "x": 0,
+    "y": 0,
+    // #enable(?foobar)
+    // "z": 0,
+  }
+args:

@@ -17,6 +17,7 @@ const IDENTIFIER_REGEX = /^\s*(\w+)/;
 const OPERATOR_REGEX = /^\s*([!<>]?=|<|>)/;
 const OR_REGEX = /^\s*\|/;
 const VALUE_REGEX = /^\s*"/;
+const UNARY_REGEX = /^\s*(\?|!\?)/;
 
 export function condition(match: RegExpExecArray, types: Record<string, string>, args: Record<string, string>): boolean {
 	if(!match[3]) {
@@ -32,36 +33,46 @@ export function condition(match: RegExpExecArray, types: Record<string, string>,
 		let match: RegExpExecArray | null;
 
 		while(result && condition.length > 0) {
-			match = IDENTIFIER_REGEX.exec(condition);
-			if(!match) {
-				return false;
+			match = UNARY_REGEX.exec(condition);
+
+			if(match) {
+				const operator = match[1];
+				condition = condition.slice(match[0].length);
+
+				match = IDENTIFIER_REGEX.exec(condition);
+				if(!match) {
+					return false;
+				}
+
+				const identifier = match[1];
+				condition = condition.slice(match[0].length);
+
+				switch(operator) {
+					case '?':
+						result = typeof args[identifier] !== 'undefined';
+						break;
+					case '!?':
+						result = typeof args[identifier] === 'undefined';
+						break;
+					default:
+						return false;
+				}
 			}
+			else {
+				match = IDENTIFIER_REGEX.exec(condition);
+				if(!match) {
+					return false;
+				}
 
-			const identifier = match[1];
-			condition = condition.slice(match[0].length);
+				const identifier = match[1];
+				condition = condition.slice(match[0].length);
 
-			match = OPERATOR_REGEX.exec(condition);
-			if(!match) {
-				return false;
-			}
+				match = OPERATOR_REGEX.exec(condition);
+				if(!match) {
+					return false;
+				}
 
-			const operator = match[1];
-			condition = condition.slice(match[0].length);
-
-			match = VALUE_REGEX.exec(condition);
-			if(!match) {
-				return false;
-			}
-
-			const end = matchPair(condition, match[0].length - 1, DIRECTIVE_CONFIG);
-			if(!end) {
-				return false;
-			}
-
-			const operands = [condition.slice(match[0].length, end)];
-			condition = condition.slice(end + 1);
-
-			while((match = OR_REGEX.exec(condition))) {
+				const operator = match[1];
 				condition = condition.slice(match[0].length);
 
 				match = VALUE_REGEX.exec(condition);
@@ -74,43 +85,60 @@ export function condition(match: RegExpExecArray, types: Record<string, string>,
 					return false;
 				}
 
-				operands.push(condition.slice(match[0].length, end));
+				const operands = [condition.slice(match[0].length, end)];
 				condition = condition.slice(end + 1);
-			}
 
-			// console.log(identifier, operator, operands)
+				while((match = OR_REGEX.exec(condition))) {
+					condition = condition.slice(match[0].length);
 
-			const value = args[identifier];
-
-			if(types[identifier] === 'version') {
-				switch(operator) {
-					case '=':
-						result = operands.includes(value);
-						break;
-					case '!=':
-						result = !operands.includes(value);
-						break;
-					default:
-						for(const operand of operands) {
-							if(compareVersions.compare(value, operand, operator as CompareOperator)) {
-								result = true;
-								break;
-							}
-						}
-
+					match = VALUE_REGEX.exec(condition);
+					if(!match) {
 						return false;
+					}
+
+					const end = matchPair(condition, match[0].length - 1, DIRECTIVE_CONFIG);
+					if(!end) {
+						return false;
+					}
+
+					operands.push(condition.slice(match[0].length, end));
+					condition = condition.slice(end + 1);
 				}
-			}
-			else {
-				switch(operator) {
-					case '=':
-						result = operands.includes(value);
-						break;
-					case '!=':
-						result = !operands.includes(value);
-						break;
-					default:
-						return false;
+
+				// console.log(identifier, operator, operands)
+
+				const value = args[identifier];
+
+				if(types[identifier] === 'version') {
+					switch(operator) {
+						case '=':
+							result = operands.includes(value);
+							break;
+						case '!=':
+							result = !operands.includes(value);
+							break;
+						default:
+							for(const operand of operands) {
+								if(compareVersions.compare(value, operand, operator as CompareOperator)) {
+									result = true;
+									break;
+								}
+							}
+
+							return false;
+					}
+				}
+				else {
+					switch(operator) {
+						case '=':
+							result = operands.includes(value);
+							break;
+						case '!=':
+							result = !operands.includes(value);
+							break;
+						default:
+							return false;
+					}
 				}
 			}
 

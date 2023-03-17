@@ -111,6 +111,22 @@ The block `"key": "foobar"` will always be removed.
 }
 ```
 
+Condition
+---------
+
+```
+condition = expression ("," expression)*
+expression = (unary-operator identifier) | (identifier operator values)
+identifier = \w+
+operator = "=" | "!=" | "<" | "<=" | ">" | ">="
+unary-operator = "?" | "!?"
+values = value ("|" value)*
+```
+
+`value` is a double quote string.<br />
+The operators `<`, `<=`, `>`, `>=` are only working for the identifier `version`.
+
+
 Donations
 ---------
 

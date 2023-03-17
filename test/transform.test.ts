@@ -11,7 +11,7 @@ describe('transform', () => {
 		const data = yaml.parse(fs.readFileSync(file, 'utf-8')) as { input: string; output: string; types?: Record<string, string>; args?: Record<string, string> };
 
 		it(`${name}`, () => {
-			const result = transform(data.input, data.types, data.args);
+			const result = transform(data.input, data.types, data.args ?? {});
 
 			expect(result).to.eql(data.output);
 		});
